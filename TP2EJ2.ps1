@@ -21,7 +21,11 @@ El path del directorio puede ser una ruta tanto absoluta como relativa.
 
 .NOTES
 INTEGRANTES - TP2 - Ejercicio 6
- * Agustin Cocciardi - 40231779
+# 40231779 - Cocciardi, Agustin
+# 40078823 - Biscaia, Elías
+# 40388978 - Varela, Daniel
+# 37841788 - Sullca, Willian
+# 38056215 - Aguilera, Erik 
 #>
 
 Param( 
@@ -244,6 +248,7 @@ foreach ($archivo in $archivos) {
                     $CantidadLlamadasQueNoSuperanLaMediaSemanal[$usuario]=0
                 }
 
+                <#
                 if($diaActual -eq 1){
                     $DuracionUsuarioPorDia1[$usuario]-=$duracion
                     #$DuracionLlamadasDia1[$cantidadLlamadasDia1]=0-$duracion
@@ -272,6 +277,7 @@ foreach ($archivo in $archivos) {
                     $DuracionUsuarioPorDia7[$usuario]-=$duracion
                     #$DuracionLlamadasDia7[$cantidadLlamadasDia7]=0-$duracion
                 }
+                #>
 
             }
 
@@ -372,49 +378,73 @@ foreach ($archivo in $archivos) {
                             $LlamadasPorDia[$dia]+=1
                             $LlamadasPorSemana[$nuevoUser]+=1
                             $duracionParcial+=$duracion
+                            if($duracionParcial -lt 0){
+                                $duracionParcial*=(-1)
+                            }
                             $LlamadasHechasPorUsuario[$usuario]+="$duracionParcial,"
                             if($diaActual -eq 1){
                                 $LlamadasUsuarioPorDia1[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia1[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia1[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia1 += $dur
                                 #$DuracionLlamadasDia1[$cantidadLlamadasDia1]+=$duracion
                                 #$cantidadLlamadasDia1+=1
                             }
                             elseif($diaActual -eq 2){
                                 $LlamadasUsuarioPorDia2[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia2[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia2[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia2 += $dur
                             }
                             elseif($diaActual -eq 3){
                                 $LlamadasUsuarioPorDia3[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia3[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia3[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia3 += $dur
                             }
                             elseif($diaActual -eq 4){
                                 $LlamadasUsuarioPorDia4[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia4[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia4[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia4 += $dur
                             }
                             elseif($diaActual -eq 5){
                                 $LlamadasUsuarioPorDia5[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia5[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia5[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia5 += $dur
                             }
                             elseif($diaActual -eq 6){
                                 $LlamadasUsuarioPorDia6[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia6[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia6[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia6 += $dur
                             }
                             else{
                                 $LlamadasUsuarioPorDia7[$nuevoUser]+=1
-                                $DuracionUsuarioPorDia7[$nuevoUser]+=$duracion
+                                $DuracionUsuarioPorDia7[$nuevoUser]+=$duracionParcial
                                 $dur+=$duracion
+                                if($dur -lt 0){
+                                    $dur*=(-1)
+                                }
                                 $DuracionLlamadasDia7 += $dur
                             }
                         }
@@ -464,6 +494,9 @@ foreach ($archivo in $archivos) {
         Write-Host "Duracion promedio de llamadas por dia"
         foreach($dia in $Dias){
             $promedioDiario=($DuracionXDia[$dia]/$LlamadasPorDia[$dia])
+            if($promedioDiario -lt 0){
+                $promedioDiario*=(-1)
+            }
             Write-Host "El promedio diario en el día " $dia " es: " $promedioDiario
         }
 
@@ -475,6 +508,9 @@ foreach ($archivo in $archivos) {
                 $diAct=0
                 if($LlamadasUsuarioPorDia1[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia1[$users]/$LlamadasUsuarioPorDia1[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia1[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -485,6 +521,9 @@ foreach ($archivo in $archivos) {
                 $diAct=1
                 if($LlamadasUsuarioPorDia2[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia2[$users]/$LlamadasUsuarioPorDia2[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia2[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -495,6 +534,9 @@ foreach ($archivo in $archivos) {
                 $diAct=2
                 if($LlamadasUsuarioPorDia3[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia3[$users]/$LlamadasUsuarioPorDia3[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia3[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -505,6 +547,9 @@ foreach ($archivo in $archivos) {
                 $diAct=3
                 if($LlamadasUsuarioPorDia4[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia4[$users]/$LlamadasUsuarioPorDia4[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia4[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -515,6 +560,9 @@ foreach ($archivo in $archivos) {
                 $diAct=4
                 if($LlamadasUsuarioPorDia5[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia5[$users]/$LlamadasUsuarioPorDia5[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia5[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -525,6 +573,9 @@ foreach ($archivo in $archivos) {
                 $diAct=5
                 if($LlamadasUsuarioPorDia6[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia6[$users]/$LlamadasUsuarioPorDia6[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia6[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -535,6 +586,9 @@ foreach ($archivo in $archivos) {
                 $diAct=6
                 if($LlamadasUsuarioPorDia7[$users] -ne 0){
                     $average= $DuracionUsuarioPorDia7[$users]/$LlamadasUsuarioPorDia7[$users]
+                    if($average -lt 0){
+                        $average*=(-1)
+                    }
                     Write-Host $users " cantidad de llamadas " $LlamadasUsuarioPorDia7[$users] ". Promedio " $average ". Dia " $Dias[$diAct]
                 }
                 else{
@@ -558,6 +612,9 @@ foreach ($archivo in $archivos) {
             $numeroTotalDeLlamadas=0
             if($diaEnElQueEstoyActualmente -eq 1){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia1){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -567,6 +624,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 2){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia2){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -576,6 +636,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 3){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia3){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -585,6 +648,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 4){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia4){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -594,6 +660,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 5){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia5){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -603,6 +672,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 6){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia6){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
@@ -612,6 +684,9 @@ foreach ($archivo in $archivos) {
             }
             if($diaEnElQueEstoyActualmente -eq 7){
                 $promedioDiario=$DuracionXDia[$day]/$LlamadasPorDia[$day]
+                if($promedioDiario -lt 0){
+                    $promedioDiario*=(-1)
+                }
                 foreach($call in $DuracionLlamadasDia7){
                     if($call -lt $promedioDiario){
                         $numeroTotalDeLlamadas+=1
